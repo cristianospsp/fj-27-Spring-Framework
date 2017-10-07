@@ -1,27 +1,39 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listagem de Produtos</title>
-</head>
-<body>
-	<table>
-		<tr>
-			<th>Título</th>
-			<th>Descrição</th>
-			<th>Valores</th>
+<%@taglib tagdir="/WEB-INF/tags/templates" prefix="templates"%>
 
-		</tr>
-		<c:forEach items="${products}" var="product">
-			<tr>
-				<td>${product.title}</td>
-				<td>${product.description}</td>
-				<td><c:forEach items="${product.prices}" var="price">
+<templates:template>
+	<jsp:attribute name="title">Livros</jsp:attribute>
+	<jsp:body>
+	
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--2-col"></div>
+		<div class="mdl-cell mdl-cell--8-col">
+		<h4>${sucesso}</h4>
+		<h3>Livros</h3>
+		<table
+					class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+			<thead>
+				<tr>
+					<th class="mdl-data-table__cell--non-numeric">Título</th>
+					<th>Descrição</th>
+					<th>Valores</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${products}" var="product">
+					<tr>
+						<td class="mdl-data-table__cell--non-numeric">${product.title}</td>
+						<td class="mdl-data-table__cell--non-numeric">${product.description}</td>
+						<td><c:forEach items="${product.prices}" var="price">
 							[${price.value} - ${price.bookType}]
 						</c:forEach></td>
-			</tr>
-		</c:forEach>
-	</table>
-</body>
-</html>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		<div class="mdl-cell mdl-cell--2-col"></div>
+	</div>
+	</jsp:body>
+</templates:template>
