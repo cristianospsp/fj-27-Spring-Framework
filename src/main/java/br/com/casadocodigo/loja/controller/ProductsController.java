@@ -13,19 +13,20 @@ import br.com.casadocodigo.loja.models.BookType;
 import br.com.casadocodigo.loja.models.Product;
 
 @Controller
+@RequestMapping(value="/products")
 public class ProductsController {
 
 	@Autowired
 	private ProductDAO productDAO; 
 	
-	@RequestMapping(value="/products", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("products/list");
 		modelAndView.addObject("products", productDAO.list());
 		return modelAndView;
 	}
 	
-	@RequestMapping("/products/form")
+	@RequestMapping("/form")
 	public ModelAndView form() {
 		System.out.println("Carrega formulario...");
 		ModelAndView modelAndView = new ModelAndView("products/form");
@@ -34,7 +35,7 @@ public class ProductsController {
 	}
 	
 	@Transactional
-	@RequestMapping(value="/products", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public String save(Product product) {
 		System.out.println("Cadastrando Produto: " + product);
 		productDAO.save(product);
