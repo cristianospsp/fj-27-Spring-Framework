@@ -20,7 +20,7 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:input path="title" class="mdl-textfield__input" /> 
 					<form:errors path="title" cssStyle="color: orangered;" />
-					<label class="mdl-textfield__label" for="title">Título</label>
+					<label class="mdl-textfield__label" for="title">Tï¿½tulo</label>
 				</div>
 			</div>
 
@@ -30,7 +30,7 @@
 					<form:textarea path="description" class="mdl-textfield__input" type="text" rows="6"
 								cols="50" name="description" id="description"></form:textarea>
 								<form:errors path="description" />
-					<label class="mdl-textfield__label" for="description">Descrição</label>
+					<label class="mdl-textfield__label" for="description">Descriï¿½ï¿½o</label>
 				</div>
 			</div>
 
@@ -40,7 +40,7 @@
 					<form:input path="numberOfPages" class="mdl-textfield__input" type="text"
 								pattern="-?[0-9]*(\.[0-9]+)?" id="numberOfPages" /> 
 								<form:errors path="numberOfPages" /><label
-								class="mdl-textfield__label" for="numberOfPages"> Número de Páginas </label> <span
+								class="mdl-textfield__label" for="numberOfPages"> Nï¿½mero de Pï¿½ginas </label> <span
 								class="mdl-textfield__error">Input is not a number!</span>
 				</div>
 			</div>

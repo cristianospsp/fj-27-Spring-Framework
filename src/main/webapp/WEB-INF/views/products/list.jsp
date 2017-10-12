@@ -14,8 +14,8 @@
 					class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
 			<thead>
 				<tr>
-					<th class="mdl-data-table__cell--non-numeric">Título</th>
-					<th>Descrição</th>
+					<th class="mdl-data-table__cell--non-numeric">Tï¿½tulo</th>
+					<th>Descriï¿½ï¿½o</th>
 					<th>Valores</th>
 
 				</tr>
