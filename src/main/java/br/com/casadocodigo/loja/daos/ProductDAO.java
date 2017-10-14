@@ -14,14 +14,21 @@ public class ProductDAO {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	public void save(Product product) {
 		this.manager.persist(product);
 	}
-	
+
 	public List<Product> list() {
 		return manager
-				.createQuery("Select distinct(p) from Product p join fetch p.prices", Product.class)
-				.getResultList();
+			.createQuery("Select distinct(p) from Product p join fetch p.prices", Product.class)
+			.getResultList();
+	}
+
+	public Product find(Integer id) {
+		return manager
+			.createQuery("Select distinct(p) from Product p join fetch p.prices where p.id = :id", Product.class)
+			.setParameter("id", id)
+			.getSingleResult();
 	}
 }
