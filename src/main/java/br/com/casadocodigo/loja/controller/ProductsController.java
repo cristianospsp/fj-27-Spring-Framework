@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,7 +28,11 @@ import br.com.casadocodigo.loja.validations.ProductValidator;
 public class ProductsController {
 
 	@Autowired
-	private ProductDAO productDAO; 
+	private ProductDAO productDAO;
+
+	@Autowired
+	private FileSaver fileSaver;
+
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -51,11 +56,15 @@ public class ProductsController {
 	
 	@Transactional
 	@RequestMapping(method=RequestMethod.POST, name="saveProduct")
-	public ModelAndView save(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public ModelAndView save(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult,
+	                         RedirectAttributes redirectAttributes, MultipartFile summary) {
 		if (bindingResult.hasErrors()) {
 			return form(product); 
 		}
-		
+
+		String webPath = fileSaver.write("upload-summaries", summary);
+		product.setSummaryPath(webPath);
+
 		productDAO.save(product);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
 		return new ModelAndView("redirect:products");//"redirect:products";
