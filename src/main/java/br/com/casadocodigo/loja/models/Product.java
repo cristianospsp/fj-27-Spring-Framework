@@ -3,9 +3,11 @@ package br.com.casadocodigo.loja.models;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -104,5 +106,12 @@ public class Product {
 		sb.append(", prices=").append(prices);
 		sb.append('}');
 		return sb.toString();
+	}
+
+	public BigDecimal priceFor(BookType bookType) {
+		return prices
+			.stream()
+			.filter(price -> price.getBookType().equals(bookType))
+			.findFirst().get().getValue();
 	}
 }
