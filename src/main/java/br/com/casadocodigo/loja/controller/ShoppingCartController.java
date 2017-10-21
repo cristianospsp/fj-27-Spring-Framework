@@ -14,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Cristiano on 10/14/17.
@@ -53,16 +54,18 @@ public class ShoppingCartController {
 	}
 
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String checkout() {
-		BigDecimal total = carrinho.getTotal();
+	public Callable<String> checkout() {
+		return () -> {
+			BigDecimal total = carrinho.getTotal();
 
-		try {
-			pagamentoService.executa(new PaymentData(total));
-			return "redirect:/products";
-		} catch (HttpClientErrorException e) {
-			System.out.println("Ocorreu um erro ao criar o Pagamento... " + e.getMessage());
-			return "redirect:/shopping";
-		}
+			try {
+				pagamentoService.executa(new PaymentData(total));
+				return "redirect:/products";
+			} catch (HttpClientErrorException e) {
+				System.out.println("Ocorreu um erro ao criar o Pagamento... " + e.getMessage());
+				return "redirect:/shopping";
+			}
+		};
 
 	}
 
